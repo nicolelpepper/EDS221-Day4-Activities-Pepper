@@ -1,0 +1,87 @@
+---
+title: "EDS221 Day 4 Activity"
+author: "Nicole Pepper"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Loops and Functions
+
+
+## For Loops - Task 1
+```{r}
+# create some vectors
+weekdays <- c("Monday", "Tuesday","Wednesday","Thursday", "Friday", "Saturday","Sunday")
+transects <- c("Transect A", "Transect B", "Transect C")
+
+# create an equation
+paste(weekdays, "-",transects)
+
+week_matrix <- matrix(nrow=length(weekdays), ncol=3)
+  
+  for(i in 1:length(weekdays)){
+    for(j in 1:length(transects)){
+   week_matrix[i,j] <- paste0(weekdays[i],"-",transects[j])
+       } 
+  }
+
+week_matrix
+```
+
+## Task 2
+```{r}
+
+force <- function(mass, acc){
+ print(paste("The resulting force is", mass * acc,"Newtons"))
+}
+force(1,2)
+
+```
+
+## Task 3
+```{r}
+
+# Create a data frame with made up of the given fish parameters
+fish_params <- data.frame(sci_name = c("Chanos chanos", "Sphyraena barracuda","Caranx ignobilis"),
+                          common_name = c("Milkfish","Great barracuda","Giant Trevally"),
+                          a_est = c(0.0905,0.0181,0.0353),
+                          b_est = c(2.52,3.27,3.05)) #create a data frame with multiple columns
+
+library(tidyverse)
+# Create function for fish weight
+fish_weight_fun <- function(fish_name, tot_length){
+  my_sub <- fish_params %>%
+    filter(common_name == fish_name) #subset values to same name
+  w = my_sub$a_est *(tot_length^my_sub$b_est)
+ print(w)
+}
+
+fish_weight_fun("Milkfish",1)
+
+fish_vec <- seq(from=0, to=100, by=1)
+
+fish_weight_fun("Milkfish",fish_vec)
+```
+
+```{r}
+wave_power <- function(H_height,T_time){
+  p = 0.5*(H_height^2)*T_time
+  print(p)
+}
+
+wave_power(2,10)
+
+wave_h_vec <- seq(from=0, to=3, by = 0.2)
+wave_t_vec <- seq(from=0, to=8, by = 1)
+wave_power(wave_h_vec,wave_t_vec)
+
+
+```
+
+
+```{r}
+
+```
+
